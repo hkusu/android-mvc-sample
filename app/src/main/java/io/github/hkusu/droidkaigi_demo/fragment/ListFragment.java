@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi.fragment;
+package io.github.hkusu.droidkaigi_demo.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +11,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
-import io.github.hkusu.droidkaigi.R;
-import io.github.hkusu.droidkaigi.event.QiitaNewPostModelChangedEvent;
+import io.github.hkusu.droidkaigi_demo.R;
+import io.github.hkusu.droidkaigi_demo.event.QiitaNewPostModelChangedEvent;
 
 public class ListFragment extends Fragment {
 

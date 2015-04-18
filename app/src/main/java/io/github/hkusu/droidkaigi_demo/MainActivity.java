@@ -1,9 +1,9 @@
-package io.github.hkusu.droidkaigi;
+package io.github.hkusu.droidkaigi_demo;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
-import io.github.hkusu.droidkaigi.common.FragmentManager;
+import io.github.hkusu.droidkaigi_demo.common.FragmentManager;
 
 public class MainActivity extends ActionBarActivity {
 

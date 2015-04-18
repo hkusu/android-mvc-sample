@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi.event;
+package io.github.hkusu.droidkaigi_demo.event;
 
 public class QiitaNewPostModelChangedEvent {
 

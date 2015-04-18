@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi.common;
+package io.github.hkusu.droidkaigi_demo.common;
 
 import java.util.HashMap;
 
