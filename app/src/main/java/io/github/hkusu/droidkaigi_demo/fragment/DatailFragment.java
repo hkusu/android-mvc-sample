@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi.fragment;
+package io.github.hkusu.droidkaigi_demo.fragment;
 
 
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.github.hkusu.droidkaigi.R;
+import io.github.hkusu.droidkaigi_demo.R;
 
 /**
  * A simple {@link Fragment} subclass.

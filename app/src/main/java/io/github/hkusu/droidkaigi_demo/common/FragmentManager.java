@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi.common;
+package io.github.hkusu.droidkaigi_demo.common;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import io.github.hkusu.droidkaigi.MainActivity;
-import io.github.hkusu.droidkaigi.R;
-import io.github.hkusu.droidkaigi.fragment.ListFragment;
+import io.github.hkusu.droidkaigi_demo.MainActivity;
+import io.github.hkusu.droidkaigi_demo.R;
+import io.github.hkusu.droidkaigi_demo.fragment.ListFragment;
 
 public class FragmentManager {
 
@@ -50,7 +50,7 @@ public class FragmentManager {
             switch (tag) {
                 case LIST:
                     //fragment = MainFragment.newInstance(args);
-                    fragment = ListFragment.newInstance("", "");
+                    //fragment = ListFragment.newInstance("", "");
                     break;
                 default:
                     return;

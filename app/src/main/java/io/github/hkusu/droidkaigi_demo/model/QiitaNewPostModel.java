@@ -1,10 +1,7 @@
-package io.github.hkusu.droidkaigi.model;
-
-import java.util.List;
+package io.github.hkusu.droidkaigi_demo.model;
 
 import de.greenrobot.event.EventBus;
-import io.github.hkusu.droidkaigi.common.IModel;
-import io.github.hkusu.droidkaigi.event.QiitaNewPostModelChangedEvent;
+import io.github.hkusu.droidkaigi_demo.common.IModel;
 
 public class QiitaNewPostModel implements IModel {
 
