@@ -1,4 +1,5 @@
 package io.github.hkusu.droidkaigi_demo.common;
 
-public interface IModel {
+public enum ModelList {
+    QIITA_ITEM,
 }

@@ -3,6 +3,7 @@ package io.github.hkusu.droidkaigi_demo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
+import io.github.hkusu.droidkaigi_demo.common.FragmentList;
 import io.github.hkusu.droidkaigi_demo.common.FragmentManager;
 
 public class MainActivity extends ActionBarActivity {
@@ -12,7 +13,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            (new FragmentManager(this, R.id.container)).replace(FragmentManager.Tag.LIST, null, FragmentManager.Animation.SLIDE_IN_RIGHT, false);
+            (new FragmentManager(this, R.id.container)).replace(FragmentList.LIST, null, FragmentManager.Animation.SLIDE_IN_RIGHT, false);
         }
     }
 }

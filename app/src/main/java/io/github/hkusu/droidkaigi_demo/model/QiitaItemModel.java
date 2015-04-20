@@ -10,10 +10,9 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.droidkaigi_demo.api.HogeAsyncTask;
 import io.github.hkusu.droidkaigi_demo.entity.QiitaItemEntity;
-import io.github.hkusu.droidkaigi_demo.common.IModel;
 import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
 
-public class QiitaItemModel implements IModel {
+public class QiitaItemModel {
 
     private final EventBus mEventBus;
     private List<QiitaItemEntity> mQiitaItemEntityList = new ArrayList<>();

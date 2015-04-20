@@ -15,6 +15,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.droidkaigi_demo.R;
+import io.github.hkusu.droidkaigi_demo.common.ModelList;
 import io.github.hkusu.droidkaigi_demo.entity.QiitaItemEntity;
 import io.github.hkusu.droidkaigi_demo.common.ModelManager;
 import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
@@ -24,12 +25,6 @@ public class ListFragment extends Fragment {
 
     @InjectView(R.id.button)
     Button mButton;
-
-    public static ListFragment newInstance(Bundle args) {
-        ListFragment fragment = new ListFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public ListFragment() {
     }
@@ -55,7 +50,8 @@ public class ListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        ((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).load();
+        //((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).load();
+        ((QiitaItemModel)ModelManager.get(ModelList.QIITA_ITEM)).load();
 
         updateView();
         //String string = (String) ObjectManager.getInstance().get("hoge");
@@ -96,7 +92,8 @@ public class ListFragment extends Fragment {
 
     private void updateView() {
 
-        List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).get();
+        //List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).get();
+        List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.get(ModelList.QIITA_ITEM)).get();
 
         for (QiitaItemEntity qiitaItemEntity : list) {
             Log.i("qiita", "id=" + qiitaItemEntity.id

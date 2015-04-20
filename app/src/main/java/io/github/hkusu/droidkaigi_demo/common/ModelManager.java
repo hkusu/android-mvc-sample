@@ -5,26 +5,16 @@ import java.util.Map;
 
 public class ModelManager {
 
-    public static enum Tag {
-        QIITA_ITEM
-    }
-
-    private static ModelManager INSTANCE = new ModelManager();
-
-    private Map<Tag, IModel> showcase = new HashMap<>();
-
-    public static ModelManager getInstance() {
-        return INSTANCE;
-    }
+    private static Map<ModelList, Object> showcase = new HashMap<>();
 
     private ModelManager() {
     }
 
-    public void register(Tag tag, IModel model) {
-        showcase.put(tag, model);
+    public static void register(ModelList tag, Object object) {
+        showcase.put(tag, object);
     }
 
-    public IModel get(Tag tag) {
+    public static Object get(ModelList tag) {
         return showcase.get(tag);
     }
 }
