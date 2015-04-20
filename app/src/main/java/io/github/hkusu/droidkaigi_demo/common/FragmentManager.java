@@ -12,6 +12,8 @@ import java.util.Map;
 import io.github.hkusu.droidkaigi_demo.MainActivity;
 import io.github.hkusu.droidkaigi_demo.R;
 
+// Fragment の切り替えを行うクラス
+
 public class FragmentManager {
 
     private static final int ANIM_RES_SLIDE_IN_RIGHT = R.anim.slide_in_right;

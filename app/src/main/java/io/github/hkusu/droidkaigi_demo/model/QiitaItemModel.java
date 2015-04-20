@@ -1,61 +1,78 @@
 package io.github.hkusu.droidkaigi_demo.model;
 
-import android.util.Log;
+import android.os.AsyncTask;
+
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import io.github.hkusu.droidkaigi_demo.api.HogeAsyncTask;
-import io.github.hkusu.droidkaigi_demo.entity.QiitaItemEntity;
+import io.github.hkusu.droidkaigi_demo.api.QiitaApiService;
+import io.github.hkusu.droidkaigi_demo.common.Const;
 import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
+import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 
 public class QiitaItemModel {
 
-    private final EventBus mEventBus;
-    private List<QiitaItemEntity> mQiitaItemEntityList = new ArrayList<>();
-    private boolean mIsBusy;
+    private final List<QiitaItemEntity> mQiitaItemList = new ArrayList<>();
+    private boolean busy = false;
 
     public QiitaItemModel() {
-        mEventBus = EventBus.getDefault();
-        mIsBusy = false;
     }
 
     public List<QiitaItemEntity> get() {
-        return mQiitaItemEntityList;
+        return mQiitaItemList;
     }
 
     public void load() {
-
-        if (mIsBusy) {
+        // ビジー状態なら何もしない
+        if (busy) {
             return;
         }
+        // 非同期で API を発行
+        ApiAsyncTask apiAsyncTask = new ApiAsyncTask();
+        apiAsyncTask.execute();
+    }
 
-        HogeAsyncTask asyncJsonLoader = new HogeAsyncTask(new HogeAsyncTask.AsyncCallback() {
-            // 実行前
-            public void preExecute() {
-                mIsBusy = true;
-            }
-            // 実行後
-            public void postExecute(List<QiitaItemEntity> result) {
-                if (result == null) {
-                    return;
-                }
+    private class ApiAsyncTask extends AsyncTask<String, Integer, List<QiitaItemEntity>> {
 
-                mQiitaItemEntityList.clear();
-                mQiitaItemEntityList.addAll(result);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // ビジー状態へ
+            busy = true;
+        }
 
-                mIsBusy = false;
-                EventBus.getDefault().post(new QiitaItemLoadedEvent(true));
-            }
-            // 実行中
-            public void progressUpdate(int progress) {
-            }
-            // キャンセル
-            public void cancel() {
-            }
-        });
-        // 処理を実行
-        asyncJsonLoader.execute("");
+        @Override
+        protected List<QiitaItemEntity> doInBackground(String... strings) {
+            // Gsonの設定(ただ今回はこれが無くても動きはした)
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+            // Retrofitのアダプタ作成
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(Const.QIITA_API_ENDPOINT)
+                    .setConverter(new GsonConverter(gson))
+                    .build();
+            // アダプタをサービスに紐付け
+            QiitaApiService service = restAdapter
+                    .create(QiitaApiService.class);
+            return service.getItems(); // APIを発行
+        }
+
+        @Override
+        protected void onPostExecute(List<QiitaItemEntity> result) {
+            super.onPostExecute(result);
+            // 取得結果でリストを更新(参照は維持)
+            mQiitaItemList.clear();
+            mQiitaItemList.addAll(result);
+            // ビジー状態を解除
+            busy = false;
+            // EvnetBus へ完了通知を送る
+            EventBus.getDefault().post(new QiitaItemLoadedEvent(true));
+        }
     }
 }

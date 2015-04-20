@@ -20,15 +20,11 @@ public class MainActivity extends ActionBarActivity {
 
 //TODO 残
 
-//AsyncTaskLoaderにする
-
 //ListFragment
 //DetailFragment
 
-//期間みて？APIに再アクセス＆apiに失敗したらDBのデータ見せる
-
-//api
-//  Picasso
+//Picasso
 
 //Utility に何か
+
 //controller、(view) に分割

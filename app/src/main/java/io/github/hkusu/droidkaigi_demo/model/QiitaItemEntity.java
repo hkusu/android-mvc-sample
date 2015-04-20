@@ -1,6 +1,8 @@
-package io.github.hkusu.droidkaigi_demo.entity;
+package io.github.hkusu.droidkaigi_demo.model;
 
 import com.google.gson.annotations.SerializedName;
+
+import io.github.hkusu.droidkaigi_demo.model.QiitaItemUserEntity;
 
 public class QiitaItemEntity {
 

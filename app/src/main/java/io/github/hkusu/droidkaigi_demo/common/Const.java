@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Const {
 
+    // 固定値を定義する。メソッドも追加してよいが基本は static で
+
     public static final String QIITA_API_ENDPOINT = "http://qiita.com";
     public static final String QIITA_API_ITMES = "/api/v1/items";
 
