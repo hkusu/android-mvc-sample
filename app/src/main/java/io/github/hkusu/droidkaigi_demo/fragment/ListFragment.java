@@ -50,12 +50,8 @@ public class ListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        //((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).load();
         ((QiitaItemModel)ModelManager.get(ModelList.QIITA_ITEM)).load();
-
         updateView();
-        //String string = (String) ObjectManager.getInstance().get("hoge");
-        //Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -92,7 +88,6 @@ public class ListFragment extends Fragment {
 
     private void updateView() {
 
-        //List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).get();
         List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.get(ModelList.QIITA_ITEM)).get();
 
         for (QiitaItemEntity qiitaItemEntity : list) {
@@ -100,9 +95,9 @@ public class ListFragment extends Fragment {
                             + " uuid=" + qiitaItemEntity.uuid
                             + " title=" + qiitaItemEntity.title
                             + " url=" + qiitaItemEntity.url
-                            + " userId=" + qiitaItemEntity.userId
-                            + " usrUrlName=" + qiitaItemEntity.userUrlName
-                            + " userProfileImageUrl=" + qiitaItemEntity.userProfileImageUrl
+                            + " userId=" + qiitaItemEntity.user.id
+                            + " usrUrlName=" + qiitaItemEntity.user.urlName
+                            + " userProfileImageUrl=" + qiitaItemEntity.user.profileImageUrl
             );
         }
 

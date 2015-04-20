@@ -2,8 +2,6 @@ package io.github.hkusu.droidkaigi_demo.model;
 
 import android.util.Log;
 
-import com.activeandroid.query.Select;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,22 +31,6 @@ public class QiitaItemModel {
             return;
         }
 
-        if (0 != new Select().from(QiitaItemEntity.class).count()) {
-
-            Log.i("qiita", "DBから取得");
-
-            mQiitaItemEntityList.clear();
-            List<QiitaItemEntity> list =
-                    new Select()
-                            .from(QiitaItemEntity.class)
-                            .orderBy("id DESC")
-                            .execute();
-            mQiitaItemEntityList.addAll(list);
-
-            mEventBus.post(new QiitaItemLoadedEvent(true));
-            return;
-        }
-
         HogeAsyncTask asyncJsonLoader = new HogeAsyncTask(new HogeAsyncTask.AsyncCallback() {
             // 実行前
             public void preExecute() {
@@ -60,20 +42,11 @@ public class QiitaItemModel {
                     return;
                 }
 
-                Log.i("qiita", "APIから取得");
-
-                for (QiitaItemEntity qiitItemEntity : result) {
-                    qiitItemEntity.userId = qiitItemEntity.user.id;
-                    qiitItemEntity.userUrlName = qiitItemEntity.user.urlName;
-                    qiitItemEntity.userProfileImageUrl = qiitItemEntity.user.profileImageUrl;
-                    qiitItemEntity.save();
-                }
-
-                int i = new Select().from(QiitaItemEntity.class).count();
-                Log.i("qiita:count", "count="+i);
+                mQiitaItemEntityList.clear();
+                mQiitaItemEntityList.addAll(result);
 
                 mIsBusy = false;
-                load();
+                EventBus.getDefault().post(new QiitaItemLoadedEvent(true));
             }
             // 実行中
             public void progressUpdate(int progress) {
