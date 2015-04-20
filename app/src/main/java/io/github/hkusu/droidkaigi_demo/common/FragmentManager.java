@@ -6,16 +6,15 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.github.hkusu.droidkaigi_demo.MainActivity;
 import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.fragment.ListFragment;
+
+// Fragment の切り替えを行うクラス
 
 public class FragmentManager {
-
-    public static enum Tag {
-        LIST,
-        WEB_VIEW,
-    }
 
     private static final int ANIM_RES_SLIDE_IN_RIGHT = R.anim.slide_in_right;
     private static final int ANIM_RES_SLIDE_OUT_RIGHT = R.anim.slide_out_right;
@@ -31,6 +30,8 @@ public class FragmentManager {
         FADE_IN,
     }
 
+    private static Map<FragmentList, Class> showcase = new HashMap<>();
+
     MainActivity mMainActivity;
     int mContainer;
 
@@ -39,25 +40,29 @@ public class FragmentManager {
         mContainer = container;
     }
 
-    public void replace(Tag tag, Bundle args, Animation animation) {
+    public static void register(FragmentList tag, Class c) {
+        showcase.put(tag, c);
+    }
+
+    public static Class get(FragmentList tag) {
+        return showcase.get(tag);
+    }
+
+    public void replace(FragmentList tag, Bundle args, Animation animation) {
         replace(tag, args, animation, true);
     }
 
-    public void replace(Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
+    public void replace(FragmentList tag, Bundle args, Animation animation, boolean addToBackStack) {
 
         Fragment fragment = mMainActivity.getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
         if (fragment == null) {
-            switch (tag) {
-                case LIST:
-                    //fragment = MainFragment.newInstance(args);
-                    //fragment = ListFragment.newInstance("", "");
-                    break;
-                default:
-                    return;
+            try {
+                Class c = get(tag);
+                fragment = (Fragment)c.newInstance();
+                fragment.setArguments(args);
+            } catch (Exception e) {
+                return;
             }
-        }
-        if (fragment == null) {
-            return;
         }
 
         int enterAnim;

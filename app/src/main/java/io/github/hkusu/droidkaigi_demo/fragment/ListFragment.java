@@ -2,28 +2,29 @@ package io.github.hkusu.droidkaigi_demo.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.event.QiitaNewPostModelChangedEvent;
+import io.github.hkusu.droidkaigi_demo.common.ModelList;
+import io.github.hkusu.droidkaigi_demo.model.QiitaItemEntity;
+import io.github.hkusu.droidkaigi_demo.common.ModelManager;
+import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
+import io.github.hkusu.droidkaigi_demo.model.QiitaItemModel;
 
 public class ListFragment extends Fragment {
 
     @InjectView(R.id.button)
     Button mButton;
-
-    public static ListFragment newInstance(Bundle args) {
-        ListFragment fragment = new ListFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public ListFragment() {
     }
@@ -39,7 +40,6 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f_main, container, false);
         ButterKnife.inject(this, view); // ButterKnife
         return view;
@@ -48,9 +48,9 @@ public class ListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        ((QiitaItemModel)ModelManager.get(ModelList.QIITA_ITEM)).load();
         updateView();
-        //String string = (String) ObjectManager.getInstance().get("hoge");
-        //Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -79,13 +79,28 @@ public class ListFragment extends Fragment {
 
     // EventBus からの通知
     @SuppressWarnings("unused")
-    public void onEventMainThread(QiitaNewPostModelChangedEvent event) {
+    public void onEventMainThread(QiitaItemLoadedEvent event) {
         if (event.isSuccess()) {
             updateView();
         }
     }
 
+    // Viewの表示を更新するプライベートメソッド
     private void updateView() {
+
+        List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.get(ModelList.QIITA_ITEM)).get();
+
+        for (QiitaItemEntity qiitaItemEntity : list) {
+            Log.i("qiita", "id=" + qiitaItemEntity.id
+                            + " uuid=" + qiitaItemEntity.uuid
+                            + " title=" + qiitaItemEntity.title
+                            + " url=" + qiitaItemEntity.url
+                            + " userId=" + qiitaItemEntity.user.id
+                            + " usrUrlName=" + qiitaItemEntity.user.urlName
+                            + " userProfileImageUrl=" + qiitaItemEntity.user.profileImageUrl
+            );
+        }
+
         //TODO TextVeiwとadapterの更新
         //mFloorListAdapter.notifyDataSetChanged();
     }

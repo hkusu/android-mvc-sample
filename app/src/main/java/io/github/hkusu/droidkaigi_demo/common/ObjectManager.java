@@ -1,25 +1,22 @@
 package io.github.hkusu.droidkaigi_demo.common;
 
 import java.util.HashMap;
+import java.util.Map;
+
+// 任意のインスタンスの参照を保持できるクラス
 
 public class ObjectManager {
 
-    private static ObjectManager sObjectManager = new ObjectManager();
-
-    private HashMap<String, Object> showcase = new HashMap<>();
-
-    public static ObjectManager getInstance() {
-        return sObjectManager;
-    }
+    private static Map<String, Object> showcase = new HashMap<>();
 
     private ObjectManager() {
     }
 
-    public void register(String string, Object object) {
+    public static void register(String string, Object object) {
         showcase.put(string, object);
     }
 
-    public Object get(String string) {
+    public static Object get(String string) {
         return showcase.get(string);
     }
 }

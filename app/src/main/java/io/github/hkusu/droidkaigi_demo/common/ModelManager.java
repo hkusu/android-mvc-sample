@@ -1,29 +1,22 @@
 package io.github.hkusu.droidkaigi_demo.common;
 
 import java.util.HashMap;
+import java.util.Map;
+
+// 各モデルの参照を保持するクラス
 
 public class ModelManager {
 
-    public static enum Tag {
-        QIITA_NEW_POST
-    }
-
-    private static ModelManager sModelManager = new ModelManager();
-
-    private HashMap<Tag, IModel> showcase = new HashMap<>();
-
-    public static ModelManager getInstance() {
-        return sModelManager;
-    }
+    private static Map<ModelList, Object> showcase = new HashMap<>();
 
     private ModelManager() {
     }
 
-    public void register(Tag tag, IModel model) {
-        showcase.put(tag, model);
+    public static void register(ModelList tag, Object object) {
+        showcase.put(tag, object);
     }
 
-    public IModel get(Tag tag) {
+    public static Object get(ModelList tag) {
         return showcase.get(tag);
     }
 }
