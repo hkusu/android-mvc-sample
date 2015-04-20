@@ -2,17 +2,23 @@ package io.github.hkusu.droidkaigi_demo.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.event.QiitaNewPostModelChangedEvent;
+import io.github.hkusu.droidkaigi_demo.entity.QiitaItemEntity;
+import io.github.hkusu.droidkaigi_demo.common.ModelManager;
+import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
+import io.github.hkusu.droidkaigi_demo.model.QiitaItemModel;
 
 public class ListFragment extends Fragment {
 
@@ -48,6 +54,9 @@ public class ListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        ((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).load();
+
         updateView();
         //String string = (String) ObjectManager.getInstance().get("hoge");
         //Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
@@ -79,13 +88,27 @@ public class ListFragment extends Fragment {
 
     // EventBus からの通知
     @SuppressWarnings("unused")
-    public void onEventMainThread(QiitaNewPostModelChangedEvent event) {
+    public void onEventMainThread(QiitaItemLoadedEvent event) {
         if (event.isSuccess()) {
             updateView();
         }
     }
 
     private void updateView() {
+
+        List<QiitaItemEntity> list = ((QiitaItemModel)ModelManager.getInstance().get(ModelManager.Tag.QIITA_ITEM)).get();
+
+        for (QiitaItemEntity qiitaItemEntity : list) {
+            Log.i("qiita", "id=" + qiitaItemEntity.id
+                            + " uuid=" + qiitaItemEntity.uuid
+                            + " title=" + qiitaItemEntity.title
+                            + " url=" + qiitaItemEntity.url
+                            + " userId=" + qiitaItemEntity.userId
+                            + " usrUrlName=" + qiitaItemEntity.userUrlName
+                            + " userProfileImageUrl=" + qiitaItemEntity.userProfileImageUrl
+            );
+        }
+
         //TODO TextVeiwとadapterの更新
         //mFloorListAdapter.notifyDataSetChanged();
     }

@@ -1,19 +1,20 @@
 package io.github.hkusu.droidkaigi_demo.common;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ModelManager {
 
     public static enum Tag {
-        QIITA_NEW_POST
+        QIITA_ITEM
     }
 
-    private static ModelManager sModelManager = new ModelManager();
+    private static ModelManager INSTANCE = new ModelManager();
 
-    private HashMap<Tag, IModel> showcase = new HashMap<>();
+    private Map<Tag, IModel> showcase = new HashMap<>();
 
     public static ModelManager getInstance() {
-        return sModelManager;
+        return INSTANCE;
     }
 
     private ModelManager() {

@@ -6,11 +6,25 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.github.hkusu.droidkaigi_demo.MainActivity;
 import io.github.hkusu.droidkaigi_demo.R;
 import io.github.hkusu.droidkaigi_demo.fragment.ListFragment;
 
 public class FragmentManager {
+
+    private static Map<Tag, Class> showcase = new HashMap<>();
+
+    public static void register(Tag tag, Class c) {
+        showcase.put(tag, c);
+    }
+
+    public static Class get(Tag tag) {
+        return showcase.get(tag);
+    }
 
     public static enum Tag {
         LIST,
@@ -47,18 +61,36 @@ public class FragmentManager {
 
         Fragment fragment = mMainActivity.getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
         if (fragment == null) {
+
+            try {
+                Class c = get(tag);
+                fragment = (Fragment)c.newInstance();
+                fragment.setArguments(args);
+                //fragment = ListFragment.newInstance(args);
+            } catch (Exception e) {
+                return;
+            }
+
+/*
             switch (tag) {
                 case LIST:
-                    //fragment = MainFragment.newInstance(args);
-                    //fragment = ListFragment.newInstance("", "");
+                    try {
+                        Class c = ListFragment.class;
+                        fragment = (Fragment) c.newInstance();
+                        fragment.setArguments(args);
+                        //fragment = ListFragment.newInstance(args);
+                    } catch (Exception e) {
+                        return;
+                    }
                     break;
                 default:
                     return;
             }
+*/
         }
-        if (fragment == null) {
-            return;
-        }
+        //if (fragment == null) {
+        //    return;
+        //}
 
         int enterAnim;
         int exitAnim;

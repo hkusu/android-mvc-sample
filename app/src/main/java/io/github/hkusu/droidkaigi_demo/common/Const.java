@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Const {
 
+    public static final String QIITA_API_ENDPOINT = "http://qiita.com";
+    public static final String QIITA_API_ITMES = "/api/v1/items";
+
+
     public static final String HOGE = "hoge";
 
     public static enum Fuga {

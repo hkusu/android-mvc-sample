@@ -3,6 +3,7 @@
     package="io.github.hkusu.droidkaigi_demo" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name="io.github.hkusu.droidkaigi_demo.MainApplication"
@@ -21,5 +22,8 @@
             </intent-filter>
         </activity>
     </application>
+
+    <meta-data android:name="AA_DB_NAME" android:value="droidkaigi_demo.db" />
+    <meta-data android:name="AA_DB_VERSION" android:value="1" />
 
 </manifest>

@@ -1,10 +1,10 @@
 package io.github.hkusu.droidkaigi_demo.event;
 
-public class QiitaNewPostModelChangedEvent {
+public class QiitaItemLoadedEvent {
 
     private boolean isSuccess;
 
-    public QiitaNewPostModelChangedEvent(boolean isSuccess) {
+    public QiitaItemLoadedEvent(boolean isSuccess) {
         this.isSuccess = isSuccess;
     }
 

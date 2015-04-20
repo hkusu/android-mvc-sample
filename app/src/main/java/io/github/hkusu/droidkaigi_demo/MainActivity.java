@@ -17,15 +17,17 @@ public class MainActivity extends ActionBarActivity {
     }
 }
 
-//TODO
+//TODO 残
 
-//ActiveAndroid
-//Model、Entity(ActiveAndroidの)
+//AsyncTaskLoaderにする
+
+//ListFragment
+//DetailFragment
+
+//期間みて？APIに再アクセス＆apiに失敗したらDBのデータ見せる
 
 //api
-//  Retrofit、Picasso、OkHttp、Jackson
+//  Picasso
 
-//Utility
-//Const
-
-//controller、(view)
+//Utility に何か
+//controller、(view) に分割
