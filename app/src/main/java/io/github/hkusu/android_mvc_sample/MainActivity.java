@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo;
+package io.github.hkusu.android_mvc_sample;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 
-import io.github.hkusu.droidkaigi_demo.common.FragmentManager;
-import io.github.hkusu.droidkaigi_demo.viewController.DetailFragment;
+import io.github.hkusu.android_mvc_sample.common.FragmentManager;
+import io.github.hkusu.android_mvc_sample.viewController.DetailFragment;
 
 public class MainActivity extends ActionBarActivity {
 

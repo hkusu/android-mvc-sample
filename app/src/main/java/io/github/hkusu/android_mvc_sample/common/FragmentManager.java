@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.common;
+package io.github.hkusu.android_mvc_sample.common;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.hkusu.droidkaigi_demo.MainActivity;
-import io.github.hkusu.droidkaigi_demo.R;
+import io.github.hkusu.android_mvc_sample.MainActivity;
+import io.github.hkusu.android_mvc_sample.R;
 
 // Fragment の切り替えを行うクラス
 

@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.model;
+package io.github.hkusu.android_mvc_sample.model;
 
 import com.google.gson.annotations.SerializedName;
 

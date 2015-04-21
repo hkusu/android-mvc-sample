@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.hkusu.droidkaigi_demo" >
+    package="io.github.hkusu.android_mvc_sample" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name="io.github.hkusu.droidkaigi_demo.MainApplication"
+        android:name="io.github.hkusu.android_mvc_sample.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="io.github.hkusu.droidkaigi_demo.MainActivity"
+            android:name="io.github.hkusu.android_mvc_sample.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>

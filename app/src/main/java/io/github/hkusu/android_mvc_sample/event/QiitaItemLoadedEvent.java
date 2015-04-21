@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.event;
+package io.github.hkusu.android_mvc_sample.event;
 
 // イベントに値を詰め込んで投げることが出来る(今回は成功/失敗フラグのみ)
 

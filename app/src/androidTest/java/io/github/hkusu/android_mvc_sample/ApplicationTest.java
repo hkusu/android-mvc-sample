@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo;
+package io.github.hkusu.android_mvc_sample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.viewController;
+package io.github.hkusu.android_mvc_sample.viewController;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.model.QiitaItemEntity;
+import io.github.hkusu.android_mvc_sample.R;
+import io.github.hkusu.android_mvc_sample.model.QiitaItemEntity;
 
 public class QiitaItemListAdapter extends ArrayAdapter<QiitaItemEntity> {
 

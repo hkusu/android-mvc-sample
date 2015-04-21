@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.model;
+package io.github.hkusu.android_mvc_sample.model;
 
 import android.os.AsyncTask;
 
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import io.github.hkusu.droidkaigi_demo.api.QiitaApiService;
-import io.github.hkusu.droidkaigi_demo.common.Const;
-import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
+import io.github.hkusu.android_mvc_sample.api.QiitaApiService;
+import io.github.hkusu.android_mvc_sample.common.Const;
+import io.github.hkusu.android_mvc_sample.event.QiitaItemLoadedEvent;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 

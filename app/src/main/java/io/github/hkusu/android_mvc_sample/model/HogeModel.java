@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.model;
+package io.github.hkusu.android_mvc_sample.model;
 
 // Fragment から切り出す モデルのサンプル。API以外でも、データおよびビジネスロジックはモデルへ追い出す
 

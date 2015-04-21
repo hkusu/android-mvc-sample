@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.viewController;
+package io.github.hkusu.android_mvc_sample.viewController;
 
 // Fragment から切り出す Controller のサンプル。viewやアダプタ等のインスタンスの参照を受け取って処理する
 

@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.common;
+package io.github.hkusu.android_mvc_sample.common;
 
 // ユーティリティクラス。状態を持たないもの。各メソッドは static で定義
 

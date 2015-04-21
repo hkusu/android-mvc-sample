@@ -1,12 +1,12 @@
-package io.github.hkusu.droidkaigi_demo;
+package io.github.hkusu.android_mvc_sample;
 
 import android.app.Application;
 
-import io.github.hkusu.droidkaigi_demo.common.FragmentManager;
-import io.github.hkusu.droidkaigi_demo.common.ModelManager;
-import io.github.hkusu.droidkaigi_demo.viewController.DetailFragment;
-import io.github.hkusu.droidkaigi_demo.viewController.ListFragment;
-import io.github.hkusu.droidkaigi_demo.model.QiitaItemModel;
+import io.github.hkusu.android_mvc_sample.common.FragmentManager;
+import io.github.hkusu.android_mvc_sample.common.ModelManager;
+import io.github.hkusu.android_mvc_sample.viewController.DetailFragment;
+import io.github.hkusu.android_mvc_sample.viewController.ListFragment;
+import io.github.hkusu.android_mvc_sample.model.QiitaItemModel;
 
 public class MainApplication extends Application {
 

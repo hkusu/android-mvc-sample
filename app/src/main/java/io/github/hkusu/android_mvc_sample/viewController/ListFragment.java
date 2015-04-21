@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.viewController;
+package io.github.hkusu.android_mvc_sample.viewController;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,13 +15,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 import de.greenrobot.event.EventBus;
-import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.common.Const;
-import io.github.hkusu.droidkaigi_demo.common.FragmentManager;
-import io.github.hkusu.droidkaigi_demo.common.ModelManager;
-import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
-import io.github.hkusu.droidkaigi_demo.model.QiitaItemEntity;
-import io.github.hkusu.droidkaigi_demo.model.QiitaItemModel;
+import io.github.hkusu.android_mvc_sample.R;
+import io.github.hkusu.android_mvc_sample.common.Const;
+import io.github.hkusu.android_mvc_sample.common.FragmentManager;
+import io.github.hkusu.android_mvc_sample.common.ModelManager;
+import io.github.hkusu.android_mvc_sample.event.QiitaItemLoadedEvent;
+import io.github.hkusu.android_mvc_sample.model.QiitaItemEntity;
+import io.github.hkusu.android_mvc_sample.model.QiitaItemModel;
 
 public class ListFragment extends Fragment {
 

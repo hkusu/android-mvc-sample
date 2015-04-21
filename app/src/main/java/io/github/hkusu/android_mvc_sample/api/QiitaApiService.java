@@ -1,9 +1,9 @@
-package io.github.hkusu.droidkaigi_demo.api;
+package io.github.hkusu.android_mvc_sample.api;
 
 import java.util.List;
 
-import io.github.hkusu.droidkaigi_demo.model.QiitaItemEntity;
-import io.github.hkusu.droidkaigi_demo.common.Const;
+import io.github.hkusu.android_mvc_sample.model.QiitaItemEntity;
+import io.github.hkusu.android_mvc_sample.common.Const;
 import retrofit.http.GET;
 
 // Retrofit 経由の API をここに定義する

@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.common;
+package io.github.hkusu.android_mvc_sample.common;
 
 import java.util.HashMap;
 import java.util.Map;

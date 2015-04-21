@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.viewController;
+package io.github.hkusu.android_mvc_sample.viewController;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.common.Const;
+import io.github.hkusu.android_mvc_sample.R;
+import io.github.hkusu.android_mvc_sample.common.Const;
 
 public class DetailFragment extends Fragment {
 

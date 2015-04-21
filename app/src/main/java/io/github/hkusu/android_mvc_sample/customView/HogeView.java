@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.customView;
+package io.github.hkusu.android_mvc_sample.customView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,7 +10,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import io.github.hkusu.droidkaigi_demo.R;
+import io.github.hkusu.android_mvc_sample.R;
 
 // カスタムViewやカスタムレイアウトがあればこのディレクトリに配置。下記はscaffoldで作成したサンプル
 
