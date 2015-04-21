@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.fragment;
+package io.github.hkusu.droidkaigi_demo.viewController;
 
 import android.content.Context;
 import android.view.LayoutInflater;

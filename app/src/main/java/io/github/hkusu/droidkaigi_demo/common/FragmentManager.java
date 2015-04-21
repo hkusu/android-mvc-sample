@@ -16,7 +16,7 @@ import io.github.hkusu.droidkaigi_demo.R;
 
 public class FragmentManager {
 
-    public static enum FragmentList {
+    public static enum Tag {
         LIST,
         DETAIL,
     }
@@ -35,7 +35,7 @@ public class FragmentManager {
         FADE_IN,
     }
 
-    private static Map<FragmentList, Class> showcase = new HashMap<>();
+    private static Map<Tag, Class> showcase = new HashMap<>();
 
     MainActivity mMainActivity;
     int mContainer;
@@ -45,19 +45,19 @@ public class FragmentManager {
         mContainer = container;
     }
 
-    public static void register(FragmentList tag, Class c) {
+    public static void register(Tag tag, Class c) {
         showcase.put(tag, c);
     }
 
-    public static Class get(FragmentList tag) {
+    public static Class get(Tag tag) {
         return showcase.get(tag);
     }
 
-    public void replace(FragmentList tag, Bundle args, Animation animation) {
+    public void replace(Tag tag, Bundle args, Animation animation) {
         replace(tag, args, animation, true);
     }
 
-    public void replace(FragmentList tag, Bundle args, Animation animation, boolean addToBackStack) {
+    public void replace(Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
 
         Fragment fragment = mMainActivity.getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
         if (fragment == null) {

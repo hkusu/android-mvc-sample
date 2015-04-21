@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.view;
+package io.github.hkusu.droidkaigi_demo.customView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
