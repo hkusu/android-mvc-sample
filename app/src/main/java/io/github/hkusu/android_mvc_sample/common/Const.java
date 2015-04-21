@@ -8,7 +8,7 @@ public class Const {
     // 固定値を定義する。メソッドを定義する場合は static で
 
     public static final String QIITA_API_ENDPOINT = "http://qiita.com";
-    public static final String QIITA_API_ITMES = "/api/v1/items";
+    public static final String QIITA_API_ITEMS = "/api/v1/items";
 
     public static enum BundleKey {
         URL,

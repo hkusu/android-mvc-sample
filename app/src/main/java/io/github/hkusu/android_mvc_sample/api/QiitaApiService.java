@@ -10,7 +10,7 @@ import retrofit.http.GET;
 
 public interface QiitaApiService {
 
-    @GET(Const.QIITA_API_ITMES)
+    @GET(Const.QIITA_API_ITEMS)
     public List<QiitaItemEntity> getItems();
 
     //@GET("/api/v1/tags")
