@@ -16,6 +16,11 @@ import io.github.hkusu.droidkaigi_demo.R;
 
 public class FragmentManager {
 
+    public static enum FragmentList {
+        LIST,
+        DETAIL,
+    }
+
     private static final int ANIM_RES_SLIDE_IN_RIGHT = R.anim.slide_in_right;
     private static final int ANIM_RES_SLIDE_OUT_RIGHT = R.anim.slide_out_right;
     private static final int ANIM_RES_SLIDE_IN_BOTTOM = R.anim.slide_in_bottom;

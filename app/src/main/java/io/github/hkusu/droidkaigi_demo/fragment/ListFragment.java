@@ -3,23 +3,21 @@ package io.github.hkusu.droidkaigi_demo.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
+import butterknife.OnItemClick;
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.droidkaigi_demo.R;
-import io.github.hkusu.droidkaigi_demo.common.ModelList;
+import io.github.hkusu.droidkaigi_demo.common.Const;
+import io.github.hkusu.droidkaigi_demo.common.FragmentManager;
 import io.github.hkusu.droidkaigi_demo.common.ModelManager;
 import io.github.hkusu.droidkaigi_demo.event.QiitaItemLoadedEvent;
 import io.github.hkusu.droidkaigi_demo.model.QiitaItemEntity;
@@ -27,10 +25,13 @@ import io.github.hkusu.droidkaigi_demo.model.QiitaItemModel;
 
 public class ListFragment extends Fragment {
 
-    @InjectView(R.id.button)
-    Button mButton;
-    @InjectView(R.id.imageView)
-    ImageView mImageView;
+    @InjectView(R.id.itemCountTextView)
+    TextView mItemCountTextView;
+    @InjectView(R.id.qiitaItemListView)
+    ListView mQiitaItemListView;
+
+    private List<QiitaItemEntity> mQiitaItemList;
+    private QiitaItemListAdapter mQiitaItemListAdapter;
 
     public ListFragment() {
     }
@@ -38,15 +39,16 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //引数があれば受け取り
-        }
+        //if (getArguments() != null) {
+        //    //引数があれば受け取り
+        //}
+        mQiitaItemList = ((QiitaItemModel) ModelManager.get(ModelManager.ModelList.QIITA_ITEM)).getItemList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.inject(this, view); // ButterKnife
         return view;
     }
@@ -54,19 +56,18 @@ public class ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        Picasso.with(getActivity())
-                .load("http://i.imgur.com/DvpvklR.png")
-                .resize(200, 200)
-                .centerCrop()
-                .into(mImageView);
+        mQiitaItemListAdapter = new QiitaItemListAdapter(
+                getActivity(),
+                R.layout.adapter_qiita_item_list,
+                mQiitaItemList
+        );
+        mQiitaItemListView.setAdapter(mQiitaItemListAdapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        ((QiitaItemModel) ModelManager.get(ModelList.QIITA_ITEM)).load();
+        ((QiitaItemModel) ModelManager.get(ModelManager.ModelList.QIITA_ITEM)).load();
         updateView();
     }
 
@@ -88,10 +89,14 @@ public class ListFragment extends Fragment {
         ButterKnife.reset(this); // ButterKnife
     }
 
-    // ボタンクリック
+    // ListView 中の項目選択
     @SuppressWarnings("unused")
-    @OnClick(R.id.button)
-    public void onClickButton(View view) {
+    @OnItemClick(R.id.qiitaItemListView)
+    public void onItemClickQiitaItemListView(int position) {
+        FragmentManager fragmentManager = new FragmentManager(getActivity(), R.id.container);
+        Bundle args = new Bundle();
+        args.putString(Const.BundleKey.URL.toString(), mQiitaItemList.get(position).url);
+        fragmentManager.replace(FragmentManager.FragmentList.DETAIL, args, FragmentManager.Animation.SLIDE_IN_BOTTOM);
     }
 
     // EventBus からの通知
@@ -104,23 +109,7 @@ public class ListFragment extends Fragment {
 
     // Viewの表示を更新するプライベートメソッド
     private void updateView() {
-
-        List<QiitaItemEntity> list = ((QiitaItemModel) ModelManager.get(ModelList.QIITA_ITEM)).get();
-
-        for (QiitaItemEntity qiitaItemEntity : list) {
-            Log.i("qiita", "id=" + qiitaItemEntity.id
-                            + " uuid=" + qiitaItemEntity.uuid
-                            + " title=" + qiitaItemEntity.title
-                            + " url=" + qiitaItemEntity.url
-                            + " userId=" + qiitaItemEntity.user.id
-                            + " usrUrlName=" + qiitaItemEntity.user.urlName
-                            + " userProfileImageUrl=" + qiitaItemEntity.user.profileImageUrl
-            );
-        }
-
-        //TODO TextVeiwとadapterの更新
-        //mFloorListAdapter.notifyDataSetChanged();
+        mItemCountTextView.setText(((QiitaItemModel)ModelManager.get(ModelManager.ModelList.QIITA_ITEM)).getItemCount() + " 件");
+        mQiitaItemListAdapter.notifyDataSetChanged();
     }
 }
-
-//TODO Adapter(別ファイル)、独自リスナクラス

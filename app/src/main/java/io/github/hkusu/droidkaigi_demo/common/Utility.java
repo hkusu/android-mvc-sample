@@ -7,4 +7,8 @@ public class Utility {
     // インスタンス化は禁止
     private Utility() {
     }
+
+    public static void hoge() {
+        //...
+    }
 }

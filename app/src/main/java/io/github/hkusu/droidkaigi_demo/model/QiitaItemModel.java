@@ -19,13 +19,18 @@ import retrofit.converter.GsonConverter;
 public class QiitaItemModel {
 
     private final List<QiitaItemEntity> mQiitaItemList = new ArrayList<>();
+    private int mItemCount = 0;
     private boolean busy = false;
 
     public QiitaItemModel() {
     }
 
-    public List<QiitaItemEntity> get() {
+    public List<QiitaItemEntity> getItemList() {
         return mQiitaItemList;
+    }
+
+    public int getItemCount() {
+        return mItemCount;
     }
 
     public void load() {
@@ -69,6 +74,8 @@ public class QiitaItemModel {
             // 取得結果でリストを更新(参照は維持)
             mQiitaItemList.clear();
             mQiitaItemList.addAll(result);
+            // 件数を更新
+            mItemCount = result.size();
             // ビジー状態を解除
             busy = false;
             // EvnetBus へ完了通知を送る

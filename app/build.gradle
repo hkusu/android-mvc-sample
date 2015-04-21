@@ -30,4 +30,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT' // Activeandroid を使う場合はコメントアウトを外す
 }

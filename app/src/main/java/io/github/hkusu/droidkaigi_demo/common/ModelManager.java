@@ -7,6 +7,10 @@ import java.util.Map;
 
 public class ModelManager {
 
+    public static enum ModelList {
+        QIITA_ITEM,
+    }
+
     private static Map<ModelList, Object> showcase = new HashMap<>();
 
     private ModelManager() {
