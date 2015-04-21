@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -30,7 +31,7 @@ public class ListFragment extends Fragment {
     @InjectView(R.id.qiitaItemListView)
     ListView mQiitaItemListView;
 
-    private List<QiitaItemEntity> mQiitaItemList;
+    private final List<QiitaItemEntity> mQiitaItemList = new ArrayList<>();
     private QiitaItemListAdapter mQiitaItemListAdapter;
 
     public ListFragment() {
@@ -42,7 +43,6 @@ public class ListFragment extends Fragment {
         //if (getArguments() != null) {
         //    //引数があれば受け取り
         //}
-        mQiitaItemList = ((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemList();
     }
 
     @Override
@@ -110,6 +110,8 @@ public class ListFragment extends Fragment {
     // Viewの表示を更新するプライベートメソッド
     private void updateView() {
         mItemCountTextView.setText(((QiitaItemModel)ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemCount() + " 件");
+        mQiitaItemList.clear();
+        mQiitaItemList.addAll(((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemList());
         mQiitaItemListAdapter.notifyDataSetChanged();
     }
 }
