@@ -1,4 +1,4 @@
-package io.github.hkusu.droidkaigi_demo.fragment;
+package io.github.hkusu.droidkaigi_demo.viewController;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,7 +42,7 @@ public class ListFragment extends Fragment {
         //if (getArguments() != null) {
         //    //引数があれば受け取り
         //}
-        mQiitaItemList = ((QiitaItemModel) ModelManager.get(ModelManager.ModelList.QIITA_ITEM)).getItemList();
+        mQiitaItemList = ((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemList();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((QiitaItemModel) ModelManager.get(ModelManager.ModelList.QIITA_ITEM)).load();
+        ((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).load();
         updateView();
     }
 
@@ -96,7 +96,7 @@ public class ListFragment extends Fragment {
         FragmentManager fragmentManager = new FragmentManager(getActivity(), R.id.container);
         Bundle args = new Bundle();
         args.putString(Const.BundleKey.URL.toString(), mQiitaItemList.get(position).url);
-        fragmentManager.replace(FragmentManager.FragmentList.DETAIL, args, FragmentManager.Animation.SLIDE_IN_BOTTOM);
+        fragmentManager.replace(FragmentManager.Tag.DETAIL, args, FragmentManager.Animation.SLIDE_IN_BOTTOM);
     }
 
     // EventBus からの通知
@@ -109,7 +109,7 @@ public class ListFragment extends Fragment {
 
     // Viewの表示を更新するプライベートメソッド
     private void updateView() {
-        mItemCountTextView.setText(((QiitaItemModel)ModelManager.get(ModelManager.ModelList.QIITA_ITEM)).getItemCount() + " 件");
+        mItemCountTextView.setText(((QiitaItemModel)ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemCount() + " 件");
         mQiitaItemListAdapter.notifyDataSetChanged();
     }
 }

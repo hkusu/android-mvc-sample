@@ -7,20 +7,20 @@ import java.util.Map;
 
 public class ModelManager {
 
-    public static enum ModelList {
+    public static enum Tag {
         QIITA_ITEM,
     }
 
-    private static Map<ModelList, Object> showcase = new HashMap<>();
+    private static Map<Tag, Object> showcase = new HashMap<>();
 
     private ModelManager() {
     }
 
-    public static void register(ModelList tag, Object object) {
+    public static void register(Tag tag, Object object) {
         showcase.put(tag, object);
     }
 
-    public static Object get(ModelList tag) {
+    public static Object get(Tag tag) {
         return showcase.get(tag);
     }
 }
