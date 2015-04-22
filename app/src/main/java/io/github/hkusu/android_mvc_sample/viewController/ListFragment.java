@@ -109,6 +109,7 @@ public class ListFragment extends Fragment {
 
     // Viewの表示を更新するプライベートメソッド
     private void updateView() {
+        // ここでは通信が伴うような時間がかかる処理はしない。Model上の変数をアクセスするに留める
         mItemCountTextView.setText(((QiitaItemModel)ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemCount() + " 件");
         mQiitaItemList.clear();
         mQiitaItemList.addAll(((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemList());
