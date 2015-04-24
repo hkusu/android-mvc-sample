@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.ViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,12 +38,7 @@ public class FragmentManager {
 
     private static Map<Tag, Class> showcase = new HashMap<>();
 
-    MainActivity mMainActivity;
-    int mContainer;
-
-    public FragmentManager(Context context, @IdRes int container) {
-        mMainActivity = (MainActivity)context;
-        mContainer = container;
+    private FragmentManager() {
     }
 
     public static void register(Tag tag, Class c) {
@@ -53,13 +49,13 @@ public class FragmentManager {
         return showcase.get(tag);
     }
 
-    public void replace(Tag tag, Bundle args, Animation animation) {
-        replace(tag, args, animation, true);
+    public static void replace(Context context, @IdRes int container, Tag tag, Bundle args, Animation animation) {
+        replace(context, container, tag, args, animation, true);
     }
 
-    public void replace(Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
+    public static void replace(Context context, @IdRes int container, Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
 
-        Fragment fragment = mMainActivity.getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
+        Fragment fragment = ((MainActivity)context).getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
         if (fragment == null) {
             try {
                 Class c = get(tag);
@@ -98,9 +94,9 @@ public class FragmentManager {
                 return;
         }
 
-        FragmentTransaction fragmentTransaction = mMainActivity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = ((MainActivity)context).getSupportFragmentManager().beginTransaction();
         if (animation != Animation.NON) { fragmentTransaction.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim); }
-        fragmentTransaction.replace(mContainer, fragment, String.valueOf(tag));
+        fragmentTransaction.replace(container, fragment, String.valueOf(tag));
         if (addToBackStack) { fragmentTransaction.addToBackStack(null); }
         fragmentTransaction.commit();
     }

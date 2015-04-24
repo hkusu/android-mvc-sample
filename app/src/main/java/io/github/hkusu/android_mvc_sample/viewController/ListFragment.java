@@ -93,10 +93,9 @@ public class ListFragment extends Fragment {
     @SuppressWarnings("unused")
     @OnItemClick(R.id.qiitaItemListView)
     public void onItemClickQiitaItemListView(int position) {
-        FragmentManager fragmentManager = new FragmentManager(getActivity(), R.id.container);
         Bundle args = new Bundle();
         args.putString(Const.BundleKey.URL.toString(), mQiitaItemList.get(position).url);
-        fragmentManager.replace(FragmentManager.Tag.DETAIL, args, FragmentManager.Animation.SLIDE_IN_BOTTOM);
+        FragmentManager.replace(getActivity(), R.id.container, FragmentManager.Tag.DETAIL, args, FragmentManager.Animation.SLIDE_IN_BOTTOM);
     }
 
     // EventBus からの通知
