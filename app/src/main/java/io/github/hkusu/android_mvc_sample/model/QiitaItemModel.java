@@ -13,7 +13,7 @@ public class QiitaItemModel {
 
     private final List<QiitaItemEntity> mQiitaItemList = new ArrayList<>();
     private int mItemCount = 0;
-    private boolean busy = false;
+    private boolean mIsBusy = false;
 
     public QiitaItemModel() {
     }
@@ -28,40 +28,36 @@ public class QiitaItemModel {
 
     public void load() {
         // ビジー状態なら何もしない
-        if (busy) {
+        if (mIsBusy) {
             return;
         }
         // 非同期で API を発行
-        ApiAsyncTask apiAsyncTask = new ApiAsyncTask();
-        apiAsyncTask.execute();
-    }
+        new AsyncTask<Void, Void, List<QiitaItemEntity>>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                // ビジー状態へ
+                mIsBusy = true;
+            }
 
-    private class ApiAsyncTask extends AsyncTask<String, Integer, List<QiitaItemEntity>> {
+            @Override
+            protected List<QiitaItemEntity> doInBackground(Void... voids) {
+                return ApiManager.getQiitaItem();
+            }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // ビジー状態へ
-            busy = true;
-        }
-
-        @Override
-        protected List<QiitaItemEntity> doInBackground(String... strings) {
-            return ApiManager.getQiitaItem();
-        }
-
-        @Override
-        protected void onPostExecute(List<QiitaItemEntity> result) {
-            super.onPostExecute(result);
-            // 取得結果でリストを更新(参照は維持)
-            mQiitaItemList.clear();
-            mQiitaItemList.addAll(result);
-            // 件数を更新
-            mItemCount = result.size();
-            // ビジー状態を解除
-            busy = false;
-            // EvnetBus へ完了通知を送る
-            EventBus.getDefault().post(new QiitaItemLoadedEvent(true));
-        }
+            @Override
+            protected void onPostExecute(List<QiitaItemEntity> result) {
+                super.onPostExecute(result);
+                // 取得結果でリストを更新(参照は維持)
+                mQiitaItemList.clear();
+                mQiitaItemList.addAll(result);
+                // 件数を更新
+                mItemCount = result.size();
+                // ビジー状態を解除
+                mIsBusy = false;
+                // EventBus で完了通知を送る
+                EventBus.getDefault().post(new QiitaItemLoadedEvent(true));
+            }
+        }.execute();
     }
 }
