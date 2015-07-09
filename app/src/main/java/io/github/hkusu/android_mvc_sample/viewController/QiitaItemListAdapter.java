@@ -65,4 +65,3 @@ public class QiitaItemListAdapter extends ArrayAdapter<QiitaItemEntity> {
         }
     }
 }
-

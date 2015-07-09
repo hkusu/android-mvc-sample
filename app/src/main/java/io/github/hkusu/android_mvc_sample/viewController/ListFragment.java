@@ -20,7 +20,6 @@ import io.github.hkusu.android_mvc_sample.R;
 import io.github.hkusu.android_mvc_sample.common.Const;
 import io.github.hkusu.android_mvc_sample.common.FragmentRouter;
 import io.github.hkusu.android_mvc_sample.common.ModeLocator;
-import io.github.hkusu.android_mvc_sample.event.QiitaItemLoadedEvent;
 import io.github.hkusu.android_mvc_sample.model.QiitaItemEntity;
 import io.github.hkusu.android_mvc_sample.model.QiitaItemModel;
 
@@ -100,7 +99,7 @@ public class ListFragment extends Fragment {
 
     // EventBus からの通知
     @SuppressWarnings("unused")
-    public void onEventMainThread(QiitaItemLoadedEvent event) {
+    public void onEventMainThread(QiitaItemModel.QiitaItemLoadedEvent event) {
         if (event.isSuccess()) {
             updateView();
         }
