@@ -7,7 +7,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.android_mvc_sample.api.ApiManager;
-import io.github.hkusu.android_mvc_sample.event.QiitaItemLoadedEvent;
 
 public class QiitaItemModel {
 
@@ -59,5 +58,18 @@ public class QiitaItemModel {
                 EventBus.getDefault().post(new QiitaItemLoadedEvent(true));
             }
         }.execute();
+    }
+
+    // イベントに値を詰め込んで投げることが出来る(今回は成功/失敗フラグのみ)
+    public static class QiitaItemLoadedEvent {
+        private boolean isSuccess;
+
+        private QiitaItemLoadedEvent(boolean isSuccess) {
+            this.isSuccess = isSuccess;
+        }
+
+        public boolean isSuccess() {
+            return isSuccess;
+        }
     }
 }
