@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.ViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +44,7 @@ public class FragmentRouter {
         showcase.put(tag, c);
     }
 
-    public static Class get(Tag tag) {
+    private static Class get(Tag tag) {
         return showcase.get(tag);
     }
 
@@ -99,5 +98,20 @@ public class FragmentRouter {
         fragmentTransaction.replace(container, fragment, String.valueOf(tag));
         if (addToBackStack) { fragmentTransaction.addToBackStack(null); }
         fragmentTransaction.commit();
+    }
+
+    public static Fragment newInstance(Tag tag, Bundle args) {
+        try {
+            Class c = get(tag);
+            Fragment fragment = (Fragment)c.newInstance();
+            fragment.setArguments(args);
+            return fragment;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Fragment getInstance(Context context, Tag tag) {
+        return ((MainActivity)context).getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
     }
 }
