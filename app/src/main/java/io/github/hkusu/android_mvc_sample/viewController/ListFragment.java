@@ -18,8 +18,8 @@ import butterknife.OnItemClick;
 import de.greenrobot.event.EventBus;
 import io.github.hkusu.android_mvc_sample.R;
 import io.github.hkusu.android_mvc_sample.common.Const;
-import io.github.hkusu.android_mvc_sample.common.FragmentManager;
-import io.github.hkusu.android_mvc_sample.common.ModelManager;
+import io.github.hkusu.android_mvc_sample.common.FragmentRouter;
+import io.github.hkusu.android_mvc_sample.common.ModeLocator;
 import io.github.hkusu.android_mvc_sample.event.QiitaItemLoadedEvent;
 import io.github.hkusu.android_mvc_sample.model.QiitaItemEntity;
 import io.github.hkusu.android_mvc_sample.model.QiitaItemModel;
@@ -67,7 +67,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).load();
+        ((QiitaItemModel) ModeLocator.get(ModeLocator.Tag.QIITA_ITEM)).load();
         updateView();
     }
 
@@ -95,7 +95,7 @@ public class ListFragment extends Fragment {
     public void onItemClickQiitaItemListView(int position) {
         Bundle args = new Bundle();
         args.putString(Const.BundleKey.URL.toString(), mQiitaItemList.get(position).url);
-        FragmentManager.replace(getActivity(), R.id.container, FragmentManager.Tag.DETAIL, args, FragmentManager.Animation.SLIDE_IN_BOTTOM);
+        FragmentRouter.replace(getActivity(), R.id.container, FragmentRouter.Tag.DETAIL, args, FragmentRouter.Animation.SLIDE_IN_BOTTOM);
     }
 
     // EventBus からの通知
@@ -109,9 +109,9 @@ public class ListFragment extends Fragment {
     // Viewの表示を更新するプライベートメソッド
     private void updateView() {
         // ここでは通信が伴うような時間がかかる処理はしない。Model上の変数をアクセスするに留める
-        mItemCountTextView.setText(((QiitaItemModel)ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemCount() + " 件");
+        mItemCountTextView.setText(((QiitaItemModel) ModeLocator.get(ModeLocator.Tag.QIITA_ITEM)).getItemCount() + " 件");
         mQiitaItemList.clear();
-        mQiitaItemList.addAll(((QiitaItemModel) ModelManager.get(ModelManager.Tag.QIITA_ITEM)).getItemList());
+        mQiitaItemList.addAll(((QiitaItemModel) ModeLocator.get(ModeLocator.Tag.QIITA_ITEM)).getItemList());
         mQiitaItemListAdapter.notifyDataSetChanged();
     }
 }
