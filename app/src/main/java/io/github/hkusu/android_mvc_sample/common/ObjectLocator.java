@@ -5,11 +5,11 @@ import java.util.Map;
 
 // 任意のインスタンスの参照を保持できるクラス
 
-public class ObjectManager {
+public class ObjectLocator {
 
     private static Map<String, Object> showcase = new HashMap<>();
 
-    private ObjectManager() {
+    private ObjectLocator() {
     }
 
     public static void register(String string, Object object) {
