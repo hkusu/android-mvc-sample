@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ModeLocator {
 
-    public static enum Tag {
+    public enum Tag {
         QIITA_ITEM,
     }
 

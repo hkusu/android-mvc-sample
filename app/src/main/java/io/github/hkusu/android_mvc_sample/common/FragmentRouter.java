@@ -17,7 +17,7 @@ import io.github.hkusu.android_mvc_sample.R;
 
 public class FragmentRouter {
 
-    public static enum Tag {
+    public enum Tag {
         LIST,
         DETAIL,
     }
@@ -29,7 +29,7 @@ public class FragmentRouter {
     private static final int ANIM_RES_FADE_IN = R.anim.fade_in;
     private static final int ANIM_RES_FADE_OUT = R.anim.fade_out;
 
-    public static enum Animation {
+    public enum Animation {
         NON,
         SLIDE_IN_RIGHT,
         SLIDE_IN_BOTTOM,
