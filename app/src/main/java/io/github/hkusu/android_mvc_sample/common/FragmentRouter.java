@@ -1,15 +1,14 @@
 package io.github.hkusu.android_mvc_sample.common;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.hkusu.android_mvc_sample.MainActivity;
 import io.github.hkusu.android_mvc_sample.R;
 
 // Fragment の切り替えを行うクラス
@@ -48,13 +47,12 @@ public class FragmentRouter {
         return showcase.get(tag);
     }
 
-    public static void replace(Context context, @IdRes int container, Tag tag, Bundle args, Animation animation) {
-        replace(context, container, tag, args, animation, true);
+    public static void replace(FragmentManager fragmentManager, @IdRes int container, Tag tag, Bundle args, Animation animation) {
+        replace(fragmentManager, container, tag, args, animation, true);
     }
 
-    public static void replace(Context context, @IdRes int container, Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
-
-        Fragment fragment = ((MainActivity)context).getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
+    public static void replace(FragmentManager fragmentManager, @IdRes int container, Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
+        Fragment fragment = fragmentManager.findFragmentByTag(String.valueOf(tag));
         if (fragment == null) {
             try {
                 Class c = get(tag);
@@ -93,7 +91,7 @@ public class FragmentRouter {
                 return;
         }
 
-        FragmentTransaction fragmentTransaction = ((MainActivity)context).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (animation != Animation.NON) { fragmentTransaction.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim); }
         fragmentTransaction.replace(container, fragment, String.valueOf(tag));
         if (addToBackStack) { fragmentTransaction.addToBackStack(null); }
@@ -111,7 +109,7 @@ public class FragmentRouter {
         }
     }
 
-    public static Fragment getInstance(Context context, Tag tag) {
-        return ((MainActivity)context).getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
+    public static Fragment getInstance(FragmentManager fragmentManager, Tag tag) {
+        return fragmentManager.findFragmentByTag(String.valueOf(tag));
     }
 }

@@ -1,5 +1,6 @@
 package io.github.hkusu.android_mvc_sample.viewController;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,14 @@ import io.github.hkusu.android_mvc_sample.model.QiitaItemEntity;
 
 public class QiitaItemListAdapter extends ArrayAdapter<QiitaItemEntity> {
 
-    private Context mContext;
+    private Activity mActivity;
     private LayoutInflater mLayoutInflater;
     private int mResource;
 
     // コンストラクタ
     public QiitaItemListAdapter(Context context, int resource, List<QiitaItemEntity> objects) {
         super(context, resource, objects);
-        mContext = context;
+        mActivity = (Activity)context;
         mLayoutInflater = LayoutInflater.from(context);
         mResource = resource;
     }
@@ -44,7 +45,7 @@ public class QiitaItemListAdapter extends ArrayAdapter<QiitaItemEntity> {
 
         QiitaItemEntity qiitaItemEntity = getItem(position);
 
-        Picasso.with(mContext)
+        Picasso.with(mActivity)
                 .load(qiitaItemEntity.user.profileImageUrl)
                 .resize(100, 100)
                 .centerCrop()

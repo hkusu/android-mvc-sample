@@ -94,7 +94,7 @@ public class ListFragment extends Fragment {
     public void onItemClickQiitaItemListView(int position) {
         Bundle args = new Bundle();
         args.putString(Const.BundleKey.URL.toString(), mQiitaItemList.get(position).url);
-        FragmentRouter.replace(getActivity(), R.id.container, FragmentRouter.Tag.DETAIL, args, FragmentRouter.Animation.SLIDE_IN_BOTTOM);
+        FragmentRouter.replace(getFragmentManager(), R.id.container, FragmentRouter.Tag.DETAIL, args, FragmentRouter.Animation.SLIDE_IN_BOTTOM);
     }
 
     // EventBus からの通知
