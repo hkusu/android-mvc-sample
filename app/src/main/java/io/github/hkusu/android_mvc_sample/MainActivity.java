@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 
-import io.github.hkusu.android_mvc_sample.common.FragmentManager;
+import io.github.hkusu.android_mvc_sample.common.FragmentRouter;
 import io.github.hkusu.android_mvc_sample.viewController.DetailFragment;
 
 public class MainActivity extends ActionBarActivity {
@@ -16,14 +16,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            FragmentManager.replace(this, R.id.container, FragmentManager.Tag.LIST, null, FragmentManager.Animation.NON, false);
+            FragmentRouter.replace(this, R.id.container, FragmentRouter.Tag.LIST, null, FragmentRouter.Animation.NON, false);
         }
     }
 
     // 端末のバックキーが押下された際、WebView もブラウザバックさせる
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(FragmentManager.Tag.DETAIL.toString());
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(FragmentRouter.Tag.DETAIL.toString());
         if (fragment != null) {
             WebView webView = ((DetailFragment)fragment).getWebView();
             if (webView != null) {

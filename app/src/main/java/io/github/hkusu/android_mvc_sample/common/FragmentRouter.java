@@ -15,7 +15,7 @@ import io.github.hkusu.android_mvc_sample.R;
 
 // Fragment の切り替えを行うクラス
 
-public class FragmentManager {
+public class FragmentRouter {
 
     public static enum Tag {
         LIST,
@@ -38,7 +38,7 @@ public class FragmentManager {
 
     private static Map<Tag, Class> showcase = new HashMap<>();
 
-    private FragmentManager() {
+    private FragmentRouter() {
     }
 
     public static void register(Tag tag, Class c) {

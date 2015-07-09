@@ -5,7 +5,7 @@ import java.util.Map;
 
 // 各モデルの参照を保持するクラス
 
-public class ModelManager {
+public class ModeLocator {
 
     public static enum Tag {
         QIITA_ITEM,
@@ -13,7 +13,7 @@ public class ModelManager {
 
     private static Map<Tag, Object> showcase = new HashMap<>();
 
-    private ModelManager() {
+    private ModeLocator() {
     }
 
     public static void register(Tag tag, Object object) {
