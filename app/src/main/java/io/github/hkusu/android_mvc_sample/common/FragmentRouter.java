@@ -1,23 +1,21 @@
 package io.github.hkusu.android_mvc_sample.common;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.ViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.hkusu.android_mvc_sample.MainActivity;
 import io.github.hkusu.android_mvc_sample.R;
 
 // Fragment の切り替えを行うクラス
 
 public class FragmentRouter {
 
-    public static enum Tag {
+    public enum Tag {
         LIST,
         DETAIL,
     }
@@ -29,7 +27,7 @@ public class FragmentRouter {
     private static final int ANIM_RES_FADE_IN = R.anim.fade_in;
     private static final int ANIM_RES_FADE_OUT = R.anim.fade_out;
 
-    public static enum Animation {
+    public enum Animation {
         NON,
         SLIDE_IN_RIGHT,
         SLIDE_IN_BOTTOM,
@@ -45,17 +43,16 @@ public class FragmentRouter {
         showcase.put(tag, c);
     }
 
-    public static Class get(Tag tag) {
+    private static Class get(Tag tag) {
         return showcase.get(tag);
     }
 
-    public static void replace(Context context, @IdRes int container, Tag tag, Bundle args, Animation animation) {
-        replace(context, container, tag, args, animation, true);
+    public static void replace(FragmentManager fragmentManager, @IdRes int container, Tag tag, Bundle args, Animation animation) {
+        replace(fragmentManager, container, tag, args, animation, true);
     }
 
-    public static void replace(Context context, @IdRes int container, Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
-
-        Fragment fragment = ((MainActivity)context).getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
+    public static void replace(FragmentManager fragmentManager, @IdRes int container, Tag tag, Bundle args, Animation animation, boolean addToBackStack) {
+        Fragment fragment = fragmentManager.findFragmentByTag(String.valueOf(tag));
         if (fragment == null) {
             try {
                 Class c = get(tag);
@@ -94,10 +91,25 @@ public class FragmentRouter {
                 return;
         }
 
-        FragmentTransaction fragmentTransaction = ((MainActivity)context).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (animation != Animation.NON) { fragmentTransaction.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim); }
         fragmentTransaction.replace(container, fragment, String.valueOf(tag));
         if (addToBackStack) { fragmentTransaction.addToBackStack(null); }
         fragmentTransaction.commit();
+    }
+
+    public static Fragment newInstance(Tag tag, Bundle args) {
+        try {
+            Class c = get(tag);
+            Fragment fragment = (Fragment)c.newInstance();
+            fragment.setArguments(args);
+            return fragment;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Fragment getInstance(FragmentManager fragmentManager, Tag tag) {
+        return fragmentManager.findFragmentByTag(String.valueOf(tag));
     }
 }

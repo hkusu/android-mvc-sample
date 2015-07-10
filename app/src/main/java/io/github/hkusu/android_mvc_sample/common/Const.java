@@ -10,7 +10,7 @@ public class Const {
     public static final String QIITA_API_ENDPOINT = "http://qiita.com";
     public static final String QIITA_API_ITEMS = "/api/v1/items";
 
-    public static enum BundleKey {
+    public enum BundleKey {
         URL,
     }
 

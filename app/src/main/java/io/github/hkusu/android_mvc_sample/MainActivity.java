@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            FragmentRouter.replace(this, R.id.container, FragmentRouter.Tag.LIST, null, FragmentRouter.Animation.NON, false);
+            FragmentRouter.replace(getSupportFragmentManager(), R.id.container, FragmentRouter.Tag.LIST, null, FragmentRouter.Animation.NON, false);
         }
     }
 
